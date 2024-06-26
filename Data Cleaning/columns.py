@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-df = pd.read_csv("AT_2021.csv")
+df_AT = pd.read_csv("AT_2021.csv")
+df_BE = pd.read_csv("BE_2021.csv")
 
 def extract_month(df,month):
     time = list(df['MTU'].values)
@@ -56,13 +57,22 @@ def merge_columns(df, df2):
 def ne_to_zero(df):
     return df.replace(to_replace='n/e', value=0)
 
-jan_df = df[df['MTU'].isin(extract_month(df,1))]
-jan_df = ne_to_zero(jan_df)
+jan_df_AT = df_AT[df_AT['MTU'].isin(extract_month(df_AT,1))]
+jan_df_AT = ne_to_zero(jan_df_AT)
 
+df_AT_merged = pd.DataFrame()
+merge_columns(jan_df_AT, df_AT_merged)
 
-df2 = pd.DataFrame()
-merge_columns(jan_df, df2)
+print(jan_df_AT.info())
+print(df_AT_merged.info())
+print(df_AT_merged)
 
-print(jan_df.info())
-print(df2.info())
-print(df2)
+jan_df_BE = df_BE[df_BE['MTU'].isin(extract_month(df_BE,1))]
+jan_df_BE = ne_to_zero(jan_df_BE)
+
+df_BE_merged = pd.DataFrame()
+merge_columns(jan_df_BE, df_BE_merged)
+
+print(jan_df_BE.info())
+print(df_BE_merged.info())
+print(df_BE_merged)
