@@ -45,13 +45,13 @@ def merge_columns(df, df2):
     df2['Geothermal'] = df[geo_thermal]
     df2['Hydro'] = df[hydro_pumped] + df[hydro_reservoir] + df[hydro_run]
     df2['Marine'] = df[marine]
-    df2['Other Renewable'] = df[other_renewable]
-    df2['Other'] = df[other]
+    df2['Unknown'] = df[other] + df[other_renewable]
     df2['Solar'] = df[solar]
+    df2['Nuclear'] = df[nuclear]
     df2['Waste'] = df[waste]
     df2['Wind'] = df[wind_offshore] + df[wind_onshore]
 
-def ne_to_nan(df):
+def clean_ne(df):
     pass;
 
 
