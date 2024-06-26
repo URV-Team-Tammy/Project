@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from datetime import datetime
 
 df = pd.read_csv("AT_2021.csv")
@@ -51,11 +52,13 @@ def merge_columns(df, df2):
     df2['Waste'] = df[waste]
     df2['Wind'] = df[wind_offshore] + df[wind_onshore]
 
-def clean_ne(df):
-    pass;
 
+def ne_to_zero(df):
+    return df.replace(to_replace='n/e', value=0)
 
 jan_df = df[df['MTU'].isin(extract_month(df,1))]
+jan_df = ne_to_zero(jan_df)
+
 
 df2 = pd.DataFrame()
 merge_columns(jan_df, df2)
