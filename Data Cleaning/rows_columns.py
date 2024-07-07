@@ -42,6 +42,7 @@ def merge_columns(df, df2):
     wind_offshore = "Wind Offshore  - Actual Aggregated [MW]"
     wind_onshore = "Wind Onshore  - Actual Aggregated [MW]"
 
+    df2['MTU'] = df['MTU']
     df2['Biomass'] = df[biomass]
     df2['Coal'] = df[coal] + df[peat] + df[hard_coal]
     df2['Gas'] = df[gas] + df[coal_gas]
