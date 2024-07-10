@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime
+import sys as sys
 
 
 def parsing_custom_timestamp(timestamp):
@@ -60,8 +61,13 @@ def merge_columns(df, df2):
 def ne_to_zero(df):
     return df.fillna(0)
 
+if(len(sys.argv) != 2):
+    print("usage: python3 cleaner.py filename");
+    exit();
 
-df = pd.read_csv('BE_2021.csv') #Read the CSV file
+filename = sys.argv[1];
+
+df = pd.read_csv(filename) #Read the CSV file
 
 # Rows
 df['MTU'] = df['MTU'].apply(parsing_custom_timestamp) #Applying the timestamp settings
@@ -76,12 +82,12 @@ df_tofill = ne_to_zero(df_tofill)
 df_AT_merged = pd.DataFrame()
 merge_columns(df_tofill, df_AT_merged)
 
-# Test
-print(df_tofill.info())
-print(df_AT_merged.info())
-print(df_AT_merged)
+# Commenting out tests
+# print(df_tofill.info())
+# print(df_AT_merged.info())
+# print(df_AT_merged)
 
-df_AT_merged.to_csv('BE_2021_Clean.csv', index=False)
+df_AT_merged.to_csv("out/" + filename[3:-4] + "_clean.csv", index=False)
 
 
 
