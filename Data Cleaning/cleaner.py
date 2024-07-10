@@ -47,14 +47,13 @@ def merge_columns(df, df2):
     df2['Biomass'] = df[biomass]
     df2['Coal'] = df[coal] + df[peat] + df[hard_coal]
     df2['Gas'] = df[gas] + df[coal_gas]
-    df2['Oil'] = df[oil] + df[oil_shale]
     df2['Geothermal'] = df[geo_thermal]
     df2['Hydro'] = df[hydro_pumped] + df[hydro_reservoir] + df[hydro_run]
-    df2['Marine'] = df[marine]
-    df2['Unknown'] = df[other] + df[other_renewable]
-    df2['Solar'] = df[solar]
+    df2['Hydro Discharge'] = df[hydro_pumped_consumption    ]
     df2['Nuclear'] = df[nuclear]
-    df2['Waste'] = df[waste]
+    df2['Oil'] = df[oil] + df[oil_shale]
+    df2['Solar'] = df[solar]
+    df2['Unknown'] = df[other] + df[other_renewable] + df[waste] + df[marine]
     df2['Wind'] = df[wind_offshore] + df[wind_onshore]
 
 
@@ -73,7 +72,7 @@ df = pd.read_csv(filename) #Read the CSV file
 df['MTU'] = df['MTU'].apply(parsing_custom_timestamp) #Applying the timestamp settings
 df.set_index('MTU', inplace=True)
 df = df.apply(pd.to_numeric, errors='coerce')
-df_resampled = df.resample('H').mean()
+df_resampled = df.resample('H').sum()
 df_tofill = df_resampled.fillna(method='ffill')
 df_tofill.reset_index(inplace=True)
 
