@@ -22,7 +22,7 @@ df.set_index('MTU', inplace=True)
 df = df.apply(pd.to_numeric, errors='coerce')
 
 
-df_resampled = df.resample('H').mean()
+df_resampled = df.resample('H').sum()
 
 df_tofill = df_resampled.fillna(method='ffill')
 
