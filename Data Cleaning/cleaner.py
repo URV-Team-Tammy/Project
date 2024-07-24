@@ -49,7 +49,7 @@ def merge_columns(df, df2):
     df2['Gas'] = df[gas] + df[coal_gas]
     df2['Geothermal'] = df[geo_thermal]
     df2['Hydro'] = df[hydro_pumped] + df[hydro_reservoir] + df[hydro_run]
-    df2['Hydro Discharge'] = df[hydro_pumped_consumption    ]
+    df2['Hydro Discharge'] = df[hydro_pumped_consumption]
     df2['Nuclear'] = df[nuclear]
     df2['Oil'] = df[oil] + df[oil_shale]
     df2['Solar'] = df[solar]
