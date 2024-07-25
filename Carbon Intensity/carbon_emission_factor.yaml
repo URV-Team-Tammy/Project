@@ -1,0 +1,442 @@
+AT:
+  battery discharge: 237.14249712142382
+  biomass: 230.0
+  coal: 1187.127343
+  gas: 527.8399999999999
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 237.14249712142382
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 31.0
+  unknown: 700
+  wind: 12.62
+BA:
+  battery discharge: 525.6400113137106
+  biomass: 230
+  coal: 820
+  gas: 490
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 525.6400113137106
+  nuclear: 5.13
+  oil: 650
+  solar: 28.8
+  unknown: 700
+  wind: 11
+BE:
+  battery discharge: 166.74150748371184
+  biomass: 230.0
+  coal: 1170.245378
+  gas: 508.02
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 166.74150748371184
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 36.0
+  unknown: 700
+  wind: 12.62
+BG:
+  battery discharge: 477.07779709278503
+  biomass: 230.0
+  coal: 1085.727771
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 477.07779709278503
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 27.73333333
+  unknown: 700
+  wind: 12.62
+CH:
+  battery discharge: 68.12991472725895
+  biomass: 230.0
+  coal: 820.0
+  gas: 490.0
+  geothermal: 38
+  hydro: 24
+  hydro discharge: 68.12991472725895
+  nuclear: 12
+  oil: 650.0
+  solar: 29.5
+  unknown: 165
+  wind: 11
+CY:
+  battery discharge: 968.2605808523339
+  biomass: 230.0
+  coal: 1135.5
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 968.2605808523339
+  nuclear: 5.13
+  oil: 953.61
+  solar: 25.6
+  unknown: 700
+  wind: 12.62
+CZ:
+  battery discharge: 535.9666012313977
+  biomass: 230.0
+  coal: 1061.994964
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 535.9666012313977
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 34.33333333
+  unknown: 700
+  wind: 12.62
+DE:
+  battery discharge: 419.4076679907016
+  biomass: 230.0
+  coal: 1167.165561
+  gas: 571.55
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 419.4076679907016
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 35.11666667
+  unknown: 700
+  wind: 12.62
+DK:
+  battery discharge: 210.45278732540467
+  biomass: 230.0
+  coal: 914.324608
+  gas: 456.97
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 210.45278732540467
+  nuclear: 5.13
+  oil: 1437.42
+  solar: 35.98888889
+  unknown: 700
+  wind: 12.62
+EE:
+  battery discharge: 422.26741078429336
+  biomass: 230.0
+  coal: 1059.95
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 422.26741078429336
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 36.5
+  unknown: 700
+  wind: 12.62
+ES:
+  battery discharge: 140.2415453661764
+  biomass: 230.0
+  coal: 1235.586989
+  gas: 546.61
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 140.2415453661764
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 26.46666667
+  unknown: 700
+  wind: 12.62
+FI:
+  battery discharge: 204.55475056974853
+  biomass: 230.0
+  coal: 848.9178430000001
+  gas: 415.99
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 204.55475056974853
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 45
+  unknown: 700
+  wind: 12.62
+FR:
+  battery discharge: 66.82067058776849
+  biomass: 230.0
+  coal: 968.9049130000001
+  gas: 501.61
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 66.82067058776849
+  nuclear: 5.13
+  oil: 999.44
+  solar: 30.075
+  unknown: 700
+  wind: 12.62
+GE:
+  battery discharge: 166.26279322149986
+  biomass: 230
+  coal: 820
+  gas: 490
+  geothermal: 38
+  hydro: 24
+  hydro discharge: 166.26279322149986
+  nuclear: 12
+  oil: 650
+  solar: 45
+  unknown: 700
+  wind: 11
+HR:
+  battery discharge: 273.7459426933044
+  biomass: 230.0
+  coal: 1179.944663
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 273.7459426933044
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 29.03333333
+  unknown: 240
+  wind: 12.62
+HU:
+  battery discharge: 311.972963238646
+  biomass: 230.0
+  coal: 1224.373799
+  gas: 579.76
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 311.972963238646
+  nuclear: 5.13
+  oil: 1081.58
+  solar: 30.66666667
+  unknown: 700
+  wind: 12.62
+IE:
+  battery discharge: 447.0086569777786
+  biomass: 230.0
+  coal: 1111.08478
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 447.0086569777786
+  nuclear: 5.13
+  oil: 1228.56
+  solar: 42.13333333
+  unknown: 700
+  wind: 12.62
+IT:
+  battery discharge: 390.4279679862484
+  biomass: 230.0
+  coal: 1103.940256
+  gas: 548.62
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 390.4279679862484
+  nuclear: 5.13
+  oil: 1102.74
+  solar: 26.26527778
+  unknown: 700
+  wind: 12.62
+LT:
+  battery discharge: 321.9285825024693
+  biomass: 230.0
+  coal: 1135.5
+  gas: 484.92
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 321.9285825024693
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 36.7
+  unknown: 700
+  wind: 12.62
+LU:
+  battery discharge: 340.6233514568114
+  biomass: 230.0
+  coal: 1135.5
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 340.6233514568114
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 45
+  unknown: 700
+  wind: 12.62
+LV:
+  battery discharge: 333.7276629065241
+  biomass: 230.0
+  coal: 1135.5
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 333.7276629065241
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 36.9
+  unknown: 700
+  wind: 12.62
+MD:
+  battery discharge: 532.8755839124373
+  biomass: 230
+  coal: 820
+  gas: 490
+  geothermal: 38
+  hydro: 24
+  hydro discharge: 532.8755839124373
+  nuclear: 12
+  oil: 650
+  solar: 30.25
+  unknown: 700
+  wind: 11
+ME:
+  battery discharge: 400.03933900187366
+  biomass: 230
+  coal: 820
+  gas: 490
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 400.03933900187366
+  nuclear: 5.13
+  oil: 650
+  solar: 45
+  unknown: 700
+  wind: 11
+MK:
+  battery discharge: 477.10041160023616
+  biomass: 230
+  coal: 820
+  gas: 490
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 477.10041160023616
+  nuclear: 5.13
+  oil: 650
+  solar: 45
+  unknown: 700
+  wind: 11
+NL:
+  battery discharge: 453.273091885823
+  biomass: 230.0
+  coal: 817.319095
+  gas: 521.0899999999999
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 453.273091885823
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 36.5
+  unknown: 342
+  wind: 12.62
+'NO':
+  battery discharge: 32.51061695202239
+  biomass: 230
+  coal: 883.79433
+  gas: 490
+  geothermal: 38
+  hydro: 24
+  hydro discharge: 32.51061695202239
+  nuclear: 12
+  oil: 650
+  solar: 45
+  unknown: 700
+  wind: 11
+PL:
+  battery discharge: 858.6446077025212
+  biomass: 230.0
+  coal: 1201.095409
+  gas: 555.63
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 858.6446077025212
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 34.84
+  unknown: 700
+  wind: 12.62
+PT:
+  battery discharge: 155.11322488094646
+  biomass: 230.0
+  coal: 1118.213761
+  gas: 491.49
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 155.11322488094646
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 25.6
+  unknown: 700
+  wind: 12.62
+RO:
+  battery discharge: 508.2483074889746
+  biomass: 230.0
+  coal: 1176.0432019999998
+  gas: 688.48
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 508.2483074889746
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 29.78
+  unknown: 700
+  wind: 12.62
+RS:
+  battery discharge: 537.200044744147
+  biomass: 230
+  coal: 820
+  gas: 490
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 537.200044744147
+  nuclear: 5.13
+  oil: 650
+  solar: 29.7
+  unknown: 700
+  wind: 11
+SE:
+  battery discharge: 42.07081808517848
+  biomass: 230.0
+  coal: 1171.867209
+  gas: 466.62
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 42.07081808517848
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 40.81666667
+  unknown: 258
+  wind: 12.62
+SI:
+  battery discharge: 322.65581220124767
+  biomass: 230.0
+  coal: 1041.927754
+  gas: 532.38
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 322.65581220124767
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 30.83333333
+  unknown: 700
+  wind: 12.62
+SK:
+  battery discharge: 349.7739207801914
+  biomass: 230.0
+  coal: 1310.210498
+  gas: 467.58
+  geothermal: 38
+  hydro: 10.7
+  hydro discharge: 349.7739207801914
+  nuclear: 5.13
+  oil: 1169.95
+  solar: 33.0
+  unknown: 700
+  wind: 12.62
+US-CAR-DUK:
+  battery discharge: 307.9074187530485
+  biomass: 230
+  coal: 863.063492
+  gas: 519.14
+  geothermal: 38
+  hydro: 24
+  hydro discharge: 307.9074187530485
+  nuclear: 12
+  oil: 650.0
+  solar: 26.53333333
+  unknown: 700
+  wind: 11
