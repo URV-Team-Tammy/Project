@@ -26,9 +26,13 @@ df = pd.read_csv(filename) #Read the CSV file
 
 df['CI_avg'] = df.apply(CI_calculation,axis=1)
 
-df.to_csv("out2/" + os.path.basename(filename)[:-10] + "_CI.csv", index=False)
+df2 = pd.DataFrame()
+df2["MTU"] = df["MTU"]
+df2["CI_avg"] = df["CI_avg"]
 
-# file_list = [f for f in os.listdir("out") if os.path.isfile(os.path.join("out", f))][70:]
+df2.to_csv("out2/" + os.path.basename(filename)[:-10] + "_CI.csv", index=False)
+
+# file_list = [f for f in os.listdir("out") if os.path.isfile(os.path.join("out", f))][:70]
 
 # for file in file_list:
 #     try:
@@ -40,6 +44,10 @@ df.to_csv("out2/" + os.path.basename(filename)[:-10] + "_CI.csv", index=False)
 
 #         df['CI_avg'] = df.apply(CI_calculation,axis=1)
 
-#         df.to_csv("out2/" + os.path.basename(filename)[:-10] + "_CI.csv", index=False)
-#     except ("KeyError"):
+        # df2 = pd.DataFrame()
+        # df2["MTU"] = df["MTU"]
+        # df2["CI_avg"] = df["CI_avg"]
+
+#         df2.to_csv("out2/" + os.path.basename(filename)[:-10] + "_CI.csv", index=False)
+#     except ():
 #         pass
