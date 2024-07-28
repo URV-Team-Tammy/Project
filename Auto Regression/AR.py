@@ -45,7 +45,7 @@ test_end = pd.to_datetime("2023-12-31 23:00:00")
 train_data = df[:train_end]
 test_data = df[train_end + datetime.timedelta(hours = 1):test_end]
 
-model = AutoReg(train_data,lags = 1000)
+model = AutoReg(train_data,lags = 100)
 
 model_fit = model.fit()
 print(model_fit.summary())
@@ -55,7 +55,7 @@ test_data['Prediction'] = predictions.values
 final_df = test_data
 
 rmse = sqrt(mean_squared_error(final_df.CI_avg,final_df.Prediction))
-print(rmse) 
+print(rmse) # ~87.078 for lags = 100
 
 plt.plot(final_df.CI_avg)
 plt.plot(final_df.Prediction, color = "red")
