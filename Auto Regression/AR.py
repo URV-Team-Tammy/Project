@@ -11,15 +11,13 @@ from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 from statsmodels.tsa.ar_model import AutoReg
 from time import time
 
-def join_csv(region):
-    joined_files = os.path.join("./", region+"*.csv") 
-    joined_list = sorted(glob.glob(joined_files))
-    df = pd.concat(map(pd.read_csv, joined_list), ignore_index=True) 
+def open_csv(region):
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../Data Cleaning/out3/'+region+'_sum.csv'))
     df["MTU"] = pd.to_datetime(df["MTU"],infer_datetime_format=True)
     df.set_index("MTU", inplace=True)
     return df.dropna()
 
-df = join_csv("BE")
+df = open_csv("BE")
 # start = pd.to_datetime("2023-07-01 00:00:00")
 # df = df[start:]
 
@@ -55,7 +53,7 @@ test_data['Prediction'] = predictions.values
 final_df = test_data
 
 rmse = sqrt(mean_squared_error(final_df.CI_avg,final_df.Prediction))
-print(rmse) # ~87.078 for lags = 100
+print(rmse) # ~87.078 for lags = 100 for BE_sum.csv
 
 plt.plot(final_df.CI_avg)
 plt.plot(final_df.Prediction, color = "red")
