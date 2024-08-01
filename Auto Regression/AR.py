@@ -20,8 +20,8 @@ def open_csv(region):
 
 df = open_csv("BE")
 print(df)
-start = pd.to_datetime("2023-07-01 00:00:00")
-df = df[start:]
+# start = pd.to_datetime("2023-07-01 00:00:00")
+# df = df[start:]
 
 dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
 print("P-Value : ",dftest[1])
