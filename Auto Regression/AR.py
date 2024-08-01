@@ -15,11 +15,13 @@ def open_csv(region):
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), '../Data Cleaning/out3/'+region+'_sum.csv'))
     df["MTU"] = pd.to_datetime(df["MTU"],infer_datetime_format=True)
     df.set_index("MTU", inplace=True)
+    df = df.drop('Unnamed: 0', axis=1)
     return df.dropna()
 
 df = open_csv("BE")
-# start = pd.to_datetime("2023-07-01 00:00:00")
-# df = df[start:]
+print(df)
+start = pd.to_datetime("2023-07-01 00:00:00")
+df = df[start:]
 
 dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
 print("P-Value : ",dftest[1])
@@ -42,11 +44,13 @@ test_end = pd.to_datetime("2023-12-31 23:00:00")
 
 train_data = df[:train_end]
 test_data = df[train_end + datetime.timedelta(hours = 1):test_end]
+# print(train_data)
+# print(test_data)
 
 model = AutoReg(train_data,lags = 100)
 
 model_fit = model.fit()
-print(model_fit.summary())
+# print(model_fit.summary())
 
 predictions = model_fit.predict(start = train_data.shape[0] , end = df.shape[0]-1, dynamic = False)
 test_data['Prediction'] = predictions.values
@@ -78,6 +82,6 @@ def predict_future(df,years):
 
     return predict_df
 
-print(predict_future(df,1))
+# print(predict_future(df,1))
 
 
