@@ -66,7 +66,7 @@ df = open_csv("BE")
 
 # Experiment 2 : Predicting future after training on entire df.
 
-def predict_future(df,years):
+def predict_future_1(df,years):
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
     final_df = pd.DataFrame()
 
@@ -82,7 +82,6 @@ def predict_future(df,years):
         model_fit = model.fit()
         # print(model_fit.summary())    
 
-        # predictions_future = model_fit.predict(start = df.shape[0]+1 , end = df.shape[0]+years*366*24, dynamic = False)
         predictions_future = model_fit.predict(start = df.shape[0]+1 , end = df.shape[0]+len(curr_time), dynamic = False)
 
         predict_df = pd.DataFrame()
@@ -94,8 +93,25 @@ def predict_future(df,years):
 
     return final_df
 
+def predict_future_2(df,years):
+    timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
+    
+    model = AutoReg(df,lags = 150)
+    model_fit = model.fit()
+    # print(model_fit.summary())    
+
+    predictions_future = model_fit.predict(start = df.shape[0]+1 , end = df.shape[0]+years*366*24, dynamic = False)
+
+    predict_df = pd.DataFrame()
+    predict_df['MTU'] = timestamp_list
+    predict_df['CI_avg'] = predictions_future.values
+    predict_df.set_index("MTU", inplace=True)
+
+    return predict_df
+
 last_month = df[-31*24:]
 # print(last_month)
-print(predict_future(df,2))
+print(predict_future_2(df,2))
+print(predict_future_2(df,2))
 
 
