@@ -19,45 +19,46 @@ def open_csv(region):
     return df.dropna()
 
 df = open_csv("BE")
-print(df)
+# print(df)
 # start = pd.to_datetime("2023-07-01 00:00:00")
 # df = df[start:]
 
-dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
-print("P-Value : ",dftest[1])
+# dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
+# print("P-Value : ",dftest[1])
 
-plt.figure(figsize = (30,4))
-plt.plot(df.CI_avg)
-plt.title('Average Carbon Intensity over Time',fontsize = 20)
-plt.ylabel('Average Carbon Intensity',fontsize = 16)
+# plt.figure(figsize = (30,4))
+# plt.plot(df.CI_avg)
+# plt.title('Average Carbon Intensity over Time',fontsize = 20)
+# plt.ylabel('Average Carbon Intensity',fontsize = 16)
 
-acf_plot = plot_acf(df,lags=100)
+# acf_plot = plot_acf(df,lags=100)
 
-pacf_plot = plot_pacf(df)
+# pacf_plot = plot_pacf(df)
 
-plt.show()
+# plt.show()
 
 # Experiment 1 : Predicting 2023 after training on df from 2017-2022.
 
-train_end = pd.to_datetime("2022-12-31 23:00:00")
-test_end = pd.to_datetime("2023-12-31 23:00:00")
+train_end = pd.to_datetime("2017-1-31 23:00:00")
+test_end = pd.to_datetime("2017-2-28 23:00:00")
 
 train_data = df[:train_end]
 test_data = df[train_end + datetime.timedelta(hours = 1):test_end]
 # print(train_data)
 # print(test_data)
 
-model = AutoReg(train_data,lags = 100)
+model = AutoReg(train_data,lags = 150)
 
 model_fit = model.fit()
 # print(model_fit.summary())
 
-predictions = model_fit.predict(start = train_data.shape[0] , end = df.shape[0]-1, dynamic = False)
+predictions = model_fit.predict(start = train_data.shape[0] , end = train_data.shape[0] + test_data.shape[0]-1, dynamic = False)
 test_data['Prediction'] = predictions.values
 final_df = test_data
+print(final_df)
 
 rmse = sqrt(mean_squared_error(final_df.CI_avg,final_df.Prediction))
-print(rmse) # ~87.078 for lags = 100 for BE_sum.csv
+print(rmse) 
 
 plt.plot(final_df.CI_avg)
 plt.plot(final_df.Prediction, color = "red")
