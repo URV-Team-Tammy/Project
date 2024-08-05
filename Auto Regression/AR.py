@@ -23,50 +23,58 @@ df = open_csv("BE")
 # start = pd.to_datetime("2023-07-01 00:00:00")
 # df = df[start:]
 
-# dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
-# print("P-Value : ",dftest[1])
+def test_df(df):
+    dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
+    print("P-Value : ",dftest[1])
 
-# plt.figure(figsize = (30,4))
-# plt.plot(df.CI_avg)
-# plt.title('Average Carbon Intensity over Time',fontsize = 20)
-# plt.ylabel('Average Carbon Intensity',fontsize = 16)
+    plt.figure(figsize = (30,4))
+    plt.plot(df.CI_avg)
+    plt.title('Average Carbon Intensity over Time',fontsize = 20)
+    plt.ylabel('Average Carbon Intensity',fontsize = 16)
 
-# acf_plot = plot_acf(df,lags=100)
+    acf_plot = plot_acf(df,lags=100)
 
-# pacf_plot = plot_pacf(df)
+    pacf_plot = plot_pacf(df)
 
-# plt.show()
+    plt.show()
+
+    return
+
+test_df(df)
 
 # Experiment 1 : Predicting 2023 after training on df from 2017-2022.
 
-# train_end = pd.to_datetime("2017-1-31 23:00:00")
-# test_end = pd.to_datetime("2017-2-28 23:00:00")
+def test_error(df,train_end,test_end):
+    train_data = df[:train_end]
+    test_data = df[train_end + datetime.timedelta(hours = 1):test_end]
+    # print(train_data)
+    # print(test_data)
 
-# train_data = df[:train_end]
-# test_data = df[train_end + datetime.timedelta(hours = 1):test_end]
-# # print(train_data)
-# # print(test_data)
+    model = AutoReg(train_data,lags = 150)
 
-# model = AutoReg(train_data,lags = 150)
+    model_fit = model.fit()
+    # print(model_fit.summary())
 
-# model_fit = model.fit()
-# # print(model_fit.summary())
+    predictions = model_fit.predict(start = train_data.shape[0] , end = train_data.shape[0] + test_data.shape[0]-1, dynamic = False)
+    test_data['Prediction'] = predictions.values
+    final_df = test_data
+    print(final_df)
 
-# predictions = model_fit.predict(start = train_data.shape[0] , end = train_data.shape[0] + test_data.shape[0]-1, dynamic = False)
-# test_data['Prediction'] = predictions.values
-# final_df = test_data
-# print(final_df)
+    rmse = sqrt(mean_squared_error(final_df.CI_avg,final_df.Prediction))
+    print(rmse) 
 
-# rmse = sqrt(mean_squared_error(final_df.CI_avg,final_df.Prediction))
-# print(rmse) 
+    plt.plot(final_df.CI_avg)
+    plt.plot(final_df.Prediction, color = "red")
+    plt.show()
 
-# plt.plot(final_df.CI_avg)
-# plt.plot(final_df.Prediction, color = "red")
-# plt.show()
+    return
+
+test_error(df,pd.to_datetime("2017-1-31 23:00:00"),pd.to_datetime("2017-2-28 23:00:00"))
 
 # Experiment 2 : Predicting future after training on entire df.
 
 def predict_future_1(df,years):
+    df = df[-31*24:]
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
     final_df = pd.DataFrame()
 
@@ -94,6 +102,8 @@ def predict_future_1(df,years):
     return final_df
 
 def predict_future_2(df,years):
+    df = df[-31*24:]
+    print(df)
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
     
     model = AutoReg(df,lags = 150)
@@ -109,9 +119,7 @@ def predict_future_2(df,years):
 
     return predict_df
 
-last_month = df[-31*24:]
-# print(last_month)
-print(predict_future_2(df,2))
+print(predict_future_1(df,2))
 print(predict_future_2(df,2))
 
 
