@@ -72,21 +72,21 @@ def test_error(df,train_end,test_end):
 # Experiment 2 : Predicting future after training on entire df.
 
 def predict_future(df,years):
-    df = df[-31*24:]
+    interval = 1*31*24
+    df = df[-interval:]
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
     final_df = pd.DataFrame()
 
     while timestamp_list:
-        if len(timestamp_list) < 31*24:
+        if len(timestamp_list) < interval:
             curr_time = timestamp_list
             timestamp_list = []
         else:
-            curr_time = timestamp_list[:31*24]
-            timestamp_list = timestamp_list[31*24:]
+            curr_time = timestamp_list[:interval]
+            timestamp_list = timestamp_list[interval:]
         
         model = AutoReg(df,lags = 147)
         model_fit = model.fit()
-        # print(model_fit.summary())    
 
         predictions_future = model_fit.predict(start = df.shape[0]+1 , end = df.shape[0]+len(curr_time), dynamic = False)
 
