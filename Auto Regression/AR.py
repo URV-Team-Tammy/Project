@@ -20,8 +20,6 @@ def open_csv(region):
 
 df = open_csv("BE")
 # print(df)
-# start = pd.to_datetime("2023-07-01 00:00:00")
-# df = df[start:]
 
 def test_df(df):
     dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
@@ -40,7 +38,7 @@ def test_df(df):
 
     return
 
-test_df(df)
+# test_df(df)
 
 # Experiment 1 : Predicting 2023 after training on df from 2017-2022.
 
@@ -69,11 +67,11 @@ def test_error(df,train_end,test_end):
 
     return
 
-test_error(df,pd.to_datetime("2017-1-31 23:00:00"),pd.to_datetime("2017-3-1 23:00:00"))
+# test_error(df,pd.to_datetime("2017-1-31 23:00:00"),pd.to_datetime("2017-3-1 23:00:00"))
 
 # Experiment 2 : Predicting future after training on entire df.
 
-def predict_future_1(df,years):
+def predict_future(df,years):
     df = df[-31*24:]
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
     final_df = pd.DataFrame()
@@ -101,25 +99,12 @@ def predict_future_1(df,years):
 
     return final_df
 
-def predict_future_2(df,years):
-    df = df[-31*24:]
-    print(df)
-    timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
-    
-    model = AutoReg(df,lags = 150)
-    model_fit = model.fit()
-    # print(model_fit.summary())    
-
-    predictions_future = model_fit.predict(start = df.shape[0]+1 , end = df.shape[0]+years*366*24, dynamic = False)
-
-    predict_df = pd.DataFrame()
-    predict_df['MTU'] = timestamp_list
-    predict_df['CI_avg'] = predictions_future.values
-    predict_df.set_index("MTU", inplace=True)
-
-    return predict_df
-
-print(predict_future_1(df,2))
-print(predict_future_2(df,2))
+last_year = df[pd.to_datetime("2023-01-01 00:00:00"):pd.to_datetime("2023-12-31 23:00:00")]
+df = df[:pd.to_datetime("2022-12-31 23:00:00")]
+predict_last_year = predict_future(df,1)[:pd.to_datetime("2023-12-31 23:00:00")]
+last_year['Prediction'] = predict_last_year['CI_avg']
+rmse = sqrt(mean_squared_error(last_year.CI_avg,last_year.Prediction))
+print(last_year)
+print(rmse) 
 
 
