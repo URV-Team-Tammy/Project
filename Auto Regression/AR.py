@@ -50,7 +50,7 @@ def test_error(df,train_end,test_end):
     # print(train_data)
     # print(test_data)
 
-    model = AutoReg(train_data,lags = 150)
+    model = AutoReg(train_data,lags = 147)
 
     model_fit = model.fit()
     # print(model_fit.summary())
@@ -69,7 +69,7 @@ def test_error(df,train_end,test_end):
 
     return
 
-test_error(df,pd.to_datetime("2017-1-31 23:00:00"),pd.to_datetime("2017-2-28 23:00:00"))
+test_error(df,pd.to_datetime("2017-1-31 23:00:00"),pd.to_datetime("2017-3-1 23:00:00"))
 
 # Experiment 2 : Predicting future after training on entire df.
 
@@ -86,7 +86,7 @@ def predict_future_1(df,years):
             curr_time = timestamp_list[:31*24]
             timestamp_list = timestamp_list[31*24:]
         
-        model = AutoReg(df,lags = 150)
+        model = AutoReg(df,lags = 147)
         model_fit = model.fit()
         # print(model_fit.summary())    
 
