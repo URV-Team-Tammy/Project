@@ -97,6 +97,9 @@ def predict_future(df,years):
         final_df = pd.concat([final_df,predict_df])
         df = predict_df
 
+    plt.plot(final_df.CI_avg)
+    plt.show()
+
     return final_df
 
 last_year = df[pd.to_datetime("2023-01-01 00:00:00"):pd.to_datetime("2023-12-31 23:00:00")]
