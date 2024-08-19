@@ -35,9 +35,9 @@ def test_df(df):
     plt.ylabel('Average Carbon Intensity',fontsize = 16)
 
     acf_plot = plot_acf(df,lags=110)
-
     pacf_plot = plot_pacf(df,lags=110)
-
+    
+    plt.savefig("Result_PACF.png" , dpi=300)
     plt.show()
 
     return
@@ -46,7 +46,7 @@ def test_df(df):
 
 # Experiment : Predicting 2023 after training on df from 2017-2022.
 
-def predict_future(df,years):
+def predict_future(df,years,name):
     interval = 1*120*24
     df = df[-interval:]
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
@@ -72,7 +72,12 @@ def predict_future(df,years):
         final_df = pd.concat([final_df,predict_df])
         df = predict_df
     
+    plt.figure(figsize = (7,4))
     plt.plot(final_df.CI_avg)
+    plt.title('Average Carbon Intensity in '+str(years)+" years for region "+name)
+    plt.ylabel('Average Carbon Intensity')
+    plt.xlabel('Time')
+    plt.savefig("Result_"+name+".png" , dpi=300)
     plt.show()
 
     return final_df
@@ -85,12 +90,13 @@ def test_predict_2023(df):
     rmse = sqrt(mean_squared_error(last_year.CI_avg,last_year.Prediction))
     print(rmse) 
 
-    plt.plot(last_year.CI_avg[:"2023-01-15 23:00:00"])
-    plt.plot(last_year.Prediction[:"2023-01-15 23:00:00"], color = "red")
-    plt.show()
+    # plt.plot(last_year.CI_avg[:"2023-01-15 23:00:00"])
+    # plt.plot(last_year.Prediction[:"2023-01-15 23:00:00"], color = "red")
+    # plt.show()
 
     return last_year
 
-test_predict_2023(df)
+# test_predict_2023(df)
 
+print(predict_future(df,1,"PL"))
 
