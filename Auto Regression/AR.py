@@ -18,21 +18,25 @@ def open_csv(region):
     df = df.drop('Unnamed: 0', axis=1)
     return df.dropna()
 
-df = open_csv("BE")
+# df = open_csv("IE")
+df = open_csv("PL")
+# df = open_csv("NO4")
+
 # print(df)
 
 def test_df(df):
     dftest = adfuller(df['CI_avg'], autolag = 'AIC') # Stationary Test : P-Value < 0.5
     print("P-Value : ",dftest[1])
+    print(dftest[1] < 0.5)
 
     plt.figure(figsize = (30,4))
     plt.plot(df.CI_avg)
     plt.title('Average Carbon Intensity over Time',fontsize = 20)
     plt.ylabel('Average Carbon Intensity',fontsize = 16)
 
-    acf_plot = plot_acf(df,lags=100)
+    acf_plot = plot_acf(df,lags=110)
 
-    pacf_plot = plot_pacf(df)
+    pacf_plot = plot_pacf(df,lags=110)
 
     plt.show()
 
@@ -40,42 +44,13 @@ def test_df(df):
 
 # test_df(df)
 
-# Experiment 1 : Predicting 2023 after training on df from 2017-2022.
-
-def test_error(df,train_end,test_end):
-    train_data = df[:train_end]
-    test_data = df[train_end + datetime.timedelta(hours = 1):test_end]
-    # print(train_data)
-    # print(test_data)
-
-    model = AutoReg(train_data,lags = 147)
-
-    model_fit = model.fit()
-    # print(model_fit.summary())
-
-    predictions = model_fit.predict(start = train_data.shape[0] , end = train_data.shape[0] + test_data.shape[0]-1, dynamic = False)
-    test_data['Prediction'] = predictions.values
-    final_df = test_data
-    print(final_df)
-
-    rmse = sqrt(mean_squared_error(final_df.CI_avg,final_df.Prediction))
-    print(rmse) 
-
-    plt.plot(final_df.CI_avg)
-    plt.plot(final_df.Prediction, color = "red")
-    plt.show()
-
-    return
-
-# test_error(df,pd.to_datetime("2017-1-31 23:00:00"),pd.to_datetime("2017-3-1 23:00:00"))
-
-# Experiment 2 : Predicting future after training on entire df.
+# Experiment : Predicting 2023 after training on df from 2017-2022.
 
 def predict_future(df,years):
-    interval = 1*31*24
+    interval = 1*120*24
     df = df[-interval:]
     timestamp_list = [df.index[-1] + datetime.timedelta(hours = x) for x in range(1,years*366*24+1)] 
-    final_df = pd.DataFrame()
+    final_df = df
 
     while timestamp_list:
         if len(timestamp_list) < interval:
@@ -85,7 +60,7 @@ def predict_future(df,years):
             curr_time = timestamp_list[:interval]
             timestamp_list = timestamp_list[interval:]
         
-        model = AutoReg(df,lags = 147)
+        model = AutoReg(df,lags = 100)
         model_fit = model.fit()
 
         predictions_future = model_fit.predict(start = df.shape[0]+1 , end = df.shape[0]+len(curr_time), dynamic = False)
@@ -96,18 +71,26 @@ def predict_future(df,years):
         predict_df.set_index("MTU", inplace=True)
         final_df = pd.concat([final_df,predict_df])
         df = predict_df
-
+    
     plt.plot(final_df.CI_avg)
     plt.show()
 
     return final_df
 
-last_year = df[pd.to_datetime("2023-01-01 00:00:00"):pd.to_datetime("2023-12-31 23:00:00")]
-df = df[:pd.to_datetime("2022-12-31 23:00:00")]
-predict_last_year = predict_future(df,1)[:pd.to_datetime("2023-12-31 23:00:00")]
-last_year['Prediction'] = predict_last_year['CI_avg']
-rmse = sqrt(mean_squared_error(last_year.CI_avg,last_year.Prediction))
-print(last_year)
-print(rmse) 
+def test_predict_2023(df):
+    last_year = df[pd.to_datetime("2023-01-01 00:00:00"):pd.to_datetime("2023-12-31 23:00:00")]
+    df = df[:pd.to_datetime("2022-12-31 23:00:00")]
+    predict_last_year = predict_future(df,1)[:pd.to_datetime("2023-12-31 23:00:00")]
+    last_year['Prediction'] = predict_last_year['CI_avg']
+    rmse = sqrt(mean_squared_error(last_year.CI_avg,last_year.Prediction))
+    print(rmse) 
+
+    plt.plot(last_year.CI_avg[:"2023-01-15 23:00:00"])
+    plt.plot(last_year.Prediction[:"2023-01-15 23:00:00"], color = "red")
+    plt.show()
+
+    return last_year
+
+test_predict_2023(df)
 
 
