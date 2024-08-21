@@ -124,9 +124,11 @@ axs[1].plot(res_IE,)
 axs[1].annotate('IE',xy=(0.95,0.85), xycoords='axes fraction')
 axs[2].plot(res_NO)
 axs[2].annotate('NO',xy=(0.95,0.85), xycoords='axes fraction')
+axs = axs.ravel()
 
 for ax in axs:
     ax.label_outer()
+    ax.set_ylim([0,None])
 
 locs, labels = plt.xticks() 
 plt.xticks(locs, ['2023-Sep','2023-Nov','2024-Jan','2024-Mar','2024-May','2024-Jul','2024-Sep','2024-Nov','2025-Jan'])  
