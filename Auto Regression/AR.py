@@ -18,9 +18,9 @@ def open_csv(region):
     df = df.drop('Unnamed: 0', axis=1)
     return df.dropna()
 
-# df = open_csv("IE")
-df = open_csv("PL")
-# df = open_csv("NO4")
+df_IE = open_csv("IE")
+df_PL = open_csv("PL")
+df_NO = open_csv("NO4")
 
 # print(df)
 
@@ -36,7 +36,9 @@ def test_df(df):
 
     acf_plot = plot_acf(df,lags=110)
     pacf_plot = plot_pacf(df,lags=110)
-    
+
+    plt.xlim(0, None)
+    plt.tight_layout()
     plt.savefig("Result_PACF.png" , dpi=300)
     plt.show()
 
@@ -72,13 +74,17 @@ def predict_future(df,years,name):
         final_df = pd.concat([final_df,predict_df])
         df = predict_df
     
-    plt.figure(figsize = (7,4))
-    plt.plot(final_df.CI_avg)
-    plt.title('Average Carbon Intensity in '+str(years)+" years for region "+name)
-    plt.ylabel('Average Carbon Intensity')
-    plt.xlabel('Time')
-    plt.savefig("Result_"+name+".png" , dpi=300)
-    plt.show()
+    
+    # plt.figure(figsize = (8,4))
+    # plt.plot(final_df.CI_avg)
+    # locs, labels = plt.xticks() 
+    # plt.xticks(locs, ['2023-Sep','2023-Nov','2024-Jan','2024-Mar','2024-May','2024-Jul','2024-Sep','2024-Nov','2025-Jan'])  
+    # plt.title('Average Carbon Intensity in '+str(years)+" years for region "+name)
+    # plt.ylabel('Average Carbon Intensity')
+    # plt.xlabel('Date')
+    # plt.tight_layout()
+    # plt.savefig("Result_"+name+".png" , dpi=300)
+    # plt.show()
 
     return final_df
 
@@ -98,5 +104,33 @@ def test_predict_2023(df):
 
 # test_predict_2023(df)
 
-print(predict_future(df,1,"PL"))
+res_PL = predict_future(df_PL,1,"PL")
+res_IE = predict_future(df_IE,1,"IE")
+res_NO = predict_future(df_NO,1,"NO")
 
+# print(res_PL)
+# print(res_IE)
+# print(res_NO)
+
+fig = plt.figure(figsize=(9,5))
+gs = fig.add_gridspec(3, hspace=0)
+axs = gs.subplots(sharex=True, sharey=False)
+fig.suptitle('Average Carbon Intensity Prediction for 2024')
+fig.supylabel("Average Carbon Intensity")
+fig.supxlabel("Time")
+axs[0].plot(res_PL)
+axs[0].annotate('PL',xy=(1,0.50), xycoords='axes fraction',rotation=270)
+axs[1].plot(res_IE,)
+axs[1].annotate('IE',xy=(1,0.50), xycoords='axes fraction',rotation=270)
+axs[2].plot(res_NO)
+axs[2].annotate('NO',xy=(1,0.50), xycoords='axes fraction',rotation=270)
+axs[2].set_ylim([None, 24.5])
+
+for ax in axs:
+    ax.label_outer()
+
+locs, labels = plt.xticks() 
+plt.xticks(locs, ['2023-Sep','2023-Nov','2024-Jan','2024-Mar','2024-May','2024-Jul','2024-Sep','2024-Nov','2025-Jan'])  
+plt.tight_layout()
+plt.savefig("Result.png" , dpi=300)
+plt.show()
