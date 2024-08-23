@@ -53,7 +53,7 @@ stat_df.plot.scatter(x=x,
 
 
 lw = 0.8
- 
+
 global_avg = 368.39
 global_cv = 0.12
 plt.axhline(global_avg, color = 'grey', linestyle = 'dashdot',linewidth=lw)
