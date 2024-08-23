@@ -8,7 +8,7 @@ def format_df(df):
     copy_df['MTU'] = pd.to_datetime(copy_df['MTU'])
     copy_df = copy_df.bfill().ffill()
     return copy_df
-
+ 
 def get_year_df(df, selected_year = 2022, drop_datetime=True): 
     copy_df = format_df(df)
 
