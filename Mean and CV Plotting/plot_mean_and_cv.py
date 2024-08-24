@@ -38,11 +38,11 @@ fig, ax = plt.subplots(figsize=(5,4))
 xmin = 0
 xmax = 0.8
 ymin = 0
-ymax = 1000
+ymax = 600
 stat_df.plot.scatter(x=x, 
                      y=y,c=y,cmap="RdYlGn_r",
                      ax=ax,
-                     s=50,
+                     s=70,
                       colorbar=False,
                       vmin=ymin,
                       vmax=ymax, 
